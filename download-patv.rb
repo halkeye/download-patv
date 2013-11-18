@@ -66,8 +66,7 @@ shows.each do |ep_info|
       end
     }
     puts "Done fetching %s" % ep_info["filename"]
-    exit 0
-    break
+    sleep 30
   end
 end
 # No episodes left, so exit uncleanly
