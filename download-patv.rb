@@ -56,6 +56,7 @@ shows.each do |ep_info|
 
     cmd = ["youtube-dl","-co", ep_info["filename"], episode_url]
     cmd.unshift("echo") unless options[:go]
+    puts "Running: " + cmd.join(' ');
     Open3.popen3(*cmd) { |stdin, stdout, stderr, wait_thr| 
       stdin.close
       exit_status = wait_thr.value # Process::Status object returned.
@@ -64,6 +65,10 @@ shows.each do |ep_info|
         throw "Unable to download episode"
       end
     }
+    puts "Done fetching %s" % ep_info["filename"]
+    exit 0
     break
   end
 end
+# No episodes left, so exit uncleanly
+exit 1
