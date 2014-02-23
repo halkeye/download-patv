@@ -82,6 +82,9 @@ episodes.each do |ep_info|
     ep_info[:year] = video.published_at.year 
     ep_info[:uniqueid] = video.unique_id
     ep_info[:plot] = video.description
+    match = video.description.match(/^CheckPoint, Season \d+, Episode \d+ -\s*(.*)$/)
+    ep_info[:title] = match[1] if match
+
     ep_info[:premiered] = video.published_at
     ep_info[:aired] = video.published_at
     ep_info[:studio] = "YouTube"
